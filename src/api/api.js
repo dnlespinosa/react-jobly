@@ -53,6 +53,16 @@ class JoblyApi {
     return res.jobs
   }
 
+  static async getUser(username){
+    let res = await this.request(`users/${username}`)
+    return res.user
+  }
+
+  static async registerUser(username, password, firstName, lastName, email) {
+    let res = await this.request(`auth/register`, {username, password, firstName, lastName, email}, 'post')
+    return res
+  }
+
   // obviously, you'll add a lot here ...
 }
 

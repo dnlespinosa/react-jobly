@@ -4,11 +4,20 @@ import { Link, useParams } from 'react-router-dom'
 
 import Login from './Login'
 
-const Home = () => {
+const Home = ({ currUser, login, currentUser }) => {
     return(
         <>
-            <h1>Home Page</h1>
-            <Login />
+            {currUser ? 
+            <div>
+                <h1>Welcome back {currentUser.firstName}</h1>
+            </div> : 
+            <div>
+                <h1>Welcome, be sure to login or signup!</h1>
+                <Link to='/login'>Login</Link>
+                <Link to='/signup'>Signup</Link>
+            </div>
+            }
+            
         </>
     )
 }
