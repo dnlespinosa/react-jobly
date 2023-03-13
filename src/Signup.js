@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import JoblyApi from './api/api';
 
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 
 const Signup = ({ signup }) => {
     const INTITIALSTATE = {
@@ -11,6 +11,8 @@ const Signup = ({ signup }) => {
         last_name:'',
         email:''
     }
+
+    let navigate = useNavigate()
 
     const [userInfo, setUserInfo] = useState(INTITIALSTATE);
 
@@ -25,7 +27,7 @@ const Signup = ({ signup }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         signup(userInfo.username, userInfo.password, userInfo.first_name, userInfo.last_name, userInfo.email)
-
+        return navigate('/')
     }
 
     return (

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import JoblyApi from './api/api';
-
+import Job from './Job';
 import { Link, useParams } from 'react-router-dom'
 
-const Company = () => {
+const Company = ({ currentUser, applyToJob }) => {
     const { name } = useParams();
 
     const [company, setCompany] = useState([])
@@ -13,7 +13,6 @@ const Company = () => {
       async function getAllJobs() {
         let jobs = await JoblyApi.getAllJobs()
         setJobs(jobs)
-        console.log(jobs)
       }
       getAllJobs();
     }, [])
@@ -33,12 +32,7 @@ const Company = () => {
           <p>{company.description}</p>
           {jobs.map(job => {
                 return (
-                    <div key={job.id}>
-                        <h3>{job.title}</h3>
-                        <h5>{job.companyName}</h5>
-                        <p>Salary: {job.salary ? job.salary : 0}</p>
-                        <p>Equity: {job.equity ? job.equity : 0}</p>
-                    </div>
+                  <Job id={job.id} title={job.title} companyName={job.companyName} salary={job.salary} equity={job.equity} applyToJob={applyToJob} currentUser={currentUser} key={job.id}/>
                 )
             })}
         </>

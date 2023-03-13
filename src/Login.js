@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import JoblyApi from './api/api';
 
-import { Link, useParams, redirect } from 'react-router-dom'
+import { Link, useParams, redirect, useNavigate } from 'react-router-dom'
 
 const Login = ({ login }) => {
     const INTITIALSTATE = {
         username: '',
         password: ''
     }
+    let navigate = useNavigate()
 
     const [userInfo, setUserInfo] = useState(INTITIALSTATE);
 
@@ -21,8 +22,8 @@ const Login = ({ login }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        login(userInfo.username)
-        redirect('/')
+        login(userInfo.username, userInfo.password)
+        return navigate('/')
     }
 
     return (
@@ -36,7 +37,7 @@ const Login = ({ login }) => {
                 onChange={handleChange} />
 
                 <label htmlFor='password'>Enter Your Password</label>
-                <input type='text'
+                <input type='password'
                 id='password'
                 name='password'
                 placeholder='Enter Here'
